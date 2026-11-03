@@ -7,7 +7,7 @@ import co.mz.bank.sistema_bancario.service.ContaService;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
-
+import org.springframework.security.access.prepost.PreAuthorize;
 import java.util.List;
 
 @RestController
@@ -36,22 +36,14 @@ public class ContaController {
         return service.listarTodas();
     }
 
-    @GetMapping("/contas/{numero}")
+        @GetMapping("/contas/{numero}")
+    @PreAuthorize("hasAnyRole('ADMIN','OPERADOR') or (hasRole('CLIENTE') and #numero == authentication.name)")
     public Conta buscar(@PathVariable String numero) {
         return service.buscar(numero);
     }
 
-    @PatchMapping("/contas/{numero}/bloquear")
-    public Conta bloquear(@PathVariable String numero) {
-        return service.bloquear(numero);
-    }
-
-    @PatchMapping("/contas/{numero}/desbloquear")
-    public Conta desbloquear(@PathVariable String numero) {
-        return service.desbloquear(numero);
-    }
-
     @PutMapping("/contas/{numero}/pin")
+    @PreAuthorize("hasAnyRole('CLIENTE','CLIENTE_PIN_PENDENTE') and #numero == authentication.name")
     public Conta alterarPin(@PathVariable String numero, @Valid @RequestBody AlterarPinRequest r) {
         return service.alterarPin(numero, r);
     }

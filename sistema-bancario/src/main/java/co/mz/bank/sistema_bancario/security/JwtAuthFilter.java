@@ -13,12 +13,7 @@ import org.springframework.web.filter.OncePerRequestFilter;
 import java.io.IOException;
 import java.util.List;
 
-/**
- * Corre em cada pedido: lê o header "Authorization: Bearer <token>" e, se o token
- * for válido (e não expirou), marca o pedido como autenticado.
- * Se o token faltar ou for inválido, o pedido segue sem autenticação e o
- * Spring Security responde 401 nos endpoints protegidos.
- */
+
 public class JwtAuthFilter extends OncePerRequestFilter {
 
     private final JwtService jwtService;
