@@ -31,3 +31,22 @@ build/
 
 ### VS Code ###
 .vscode/
+
+# Segredos
+.env
+*.pem
+
+# Compilação (gerada, não se envia)
+target/
+
+# IDE
+.idea/
+.vscode/
+*.iml
+.settings/
+.project
+.classpath
+
+# Sistema
+.DS_Store
+Thumbs.db
