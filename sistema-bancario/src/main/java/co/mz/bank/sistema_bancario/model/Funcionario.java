@@ -17,7 +17,7 @@ public class Funcionario {
     @Column(nullable = false, unique = true)
     private String email;
 
-    
+    /** Senha cifrada com BCrypt; nunca sai nas respostas */
     @JsonIgnore
     @Column(name = "senha_hash", nullable = false)
     private String senhaHash;
