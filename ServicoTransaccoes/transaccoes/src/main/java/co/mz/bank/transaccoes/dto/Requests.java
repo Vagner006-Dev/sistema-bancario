@@ -9,16 +9,13 @@ import java.math.BigDecimal;
 public class Requests {
 
     public record DepositoRequest(
-        @NotNull(message = "O valor e obrigatorio")
-        @DecimalMin(value = "0.01", message = "O valor deve ser maior que zero") BigDecimal valor
-    ){}
+            @NotNull(message = "O valor é obrigatório")
+            @DecimalMin(value = "0.01", message = "O valor deve ser maior que zero") BigDecimal valor) {}
 
-    public record TransaferenciaRequest(
-        @NotBlank(message = "A conta de origem e obrigatoria")String origem,
-        @NotBlank(message = "A conta de destino e obrigatoria")String destino,
-        @NotNull(message = "O valor e obrigatorio")
-        @DecimalMin(value = "0,01", message = "O valor deve ser maior que zero" ) BigDecimal valor,
-        @NotBlank(message = "O PIN e obrigatorio") String pin
-    ){}
-
+    public record TransferenciaRequest(
+            @NotBlank(message = "A conta de origem é obrigatória") String origem,
+            @NotBlank(message = "A conta de destino é obrigatória") String destino,
+            @NotNull(message = "O valor é obrigatório")
+            @DecimalMin(value = "0.01", message = "O valor deve ser maior que zero") BigDecimal valor,
+            @NotBlank(message = "O PIN é obrigatório") String pin) {}
 }
