@@ -23,7 +23,6 @@ import java.util.concurrent.TimeUnit;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-// Atenção: NÃO usar @Transactional nesta classe, senão as threads não veem os dados.
 @SpringBootTest
 class ConcorrenciaTest {
 
@@ -32,7 +31,7 @@ class ConcorrenciaTest {
     @Autowired SaldoService saldoService;
     @Autowired ContaRepository contaRepo;
 
-    // ---------- Teste 1: depósitos simultâneos na mesma conta ----------
+
     @Test
     void depositosSimultaneos_somamOsDois() throws Exception {
         String conta = novaConta("0.00");
@@ -47,7 +46,7 @@ class ConcorrenciaTest {
         assertSaldo("1000.00", conta);   // nenhum depósito se perdeu
     }
 
-    // ---------- Teste 2: duas transferências, saldo só para uma ----------
+
     @Test
     void transferenciasSimultaneas_saldoSoParaUma() throws Exception {
         String origem = novaConta("100.00");
@@ -64,7 +63,7 @@ class ConcorrenciaTest {
         assertSaldo("100.00", destino);
     }
 
-    // ---------- Teste 3: transferências cruzadas A→B e B→A ----------
+
     @Test
     void transferenciasCruzadas_naoFicamBloqueadas() throws Exception {
         String a = novaConta("1000.00");
@@ -82,9 +81,7 @@ class ConcorrenciaTest {
         assertSaldo("1000.00", b);
     }
 
-    // ================= Métodos auxiliares =================
-
-    /** Todas as threads esperam na "linha de partida" e arrancam ao mesmo tempo. */
+    
     private int executarEmParalelo(List<Runnable> tarefas) throws Exception {
         ExecutorService pool = Executors.newFixedThreadPool(tarefas.size());
         CountDownLatch prontas = new CountDownLatch(tarefas.size());
@@ -99,7 +96,7 @@ class ConcorrenciaTest {
                     t.run();
                     return true;
                 } catch (RegraNegocioException e) {
-                    return false;   // rejeitada pelas regras (ex.: saldo insuficiente)
+                    return false;   
                 }
             }));
         }

@@ -29,6 +29,7 @@ public class SaldoService {
         conta.setSaldo(conta.getSaldo().add(valor));
     }
 
+    @Transactional 
     public void transferir(String origem, String destino, BigDecimal valor, String pin) {
         validarValor(valor);
         if (origem.equals(destino)) throw new RegraNegocioException("As contas de origem e destino devem ser diferentes");

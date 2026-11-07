@@ -18,7 +18,7 @@ public class Conta {
     private String numero;
 
     @ManyToOne(optional = false)
-    @JoinColumn(name = "cliente_id")
+    @JoinColumn(name = "cliente_id", nullable = false)
     private Cliente cliente;
 
     @JsonIgnore
