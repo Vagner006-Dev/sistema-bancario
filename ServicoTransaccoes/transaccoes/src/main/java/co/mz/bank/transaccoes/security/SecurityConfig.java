@@ -1,6 +1,5 @@
 package co.mz.bank.transaccoes.security;
 
-import io.jsonwebtoken.io.Decoders;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
@@ -18,6 +17,7 @@ import org.springframework.security.web.SecurityFilterChain;
 import javax.crypto.SecretKey;
 import javax.crypto.spec.SecretKeySpec;
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 
 @Configuration
 @EnableMethodSecurity
@@ -27,7 +27,7 @@ public class SecurityConfig {
     private String secret;
 
     private SecretKey chave() {
-        return new SecretKeySpec(Decoders.BASE64.decode(secret), "HmacSHA256");
+        return new SecretKeySpec(secret.getBytes(StandardCharsets.UTF_8), "HmacSHA256");
     }
 
     @Bean

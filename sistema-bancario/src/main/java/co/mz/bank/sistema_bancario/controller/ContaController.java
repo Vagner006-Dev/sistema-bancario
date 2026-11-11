@@ -42,6 +42,16 @@ public class ContaController {
         return service.buscar(numero);
     }
 
+    @PatchMapping("/contas/{numero}/bloquear")
+    public Conta bloquear(@PathVariable String numero) {
+        return service.bloquear(numero);
+    }
+
+    @PatchMapping("/contas/{numero}/desbloquear")
+    public Conta desbloquear(@PathVariable String numero) {
+        return service.desbloquear(numero);
+    }
+
     @PutMapping("/contas/{numero}/pin")
     @PreAuthorize("hasAnyRole('CLIENTE','CLIENTE_PIN_PENDENTE') and #numero == authentication.name")
     public Conta alterarPin(@PathVariable String numero, @Valid @RequestBody AlterarPinRequest r) {
