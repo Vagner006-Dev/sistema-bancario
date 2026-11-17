@@ -1,4 +1,3 @@
-// O navegador chama estes caminhos; o servidor Vite reencaminha para os serviços.
 const CONTAS = '/contas-api';
 const TRANSACCOES = '/transaccoes-api';
 
@@ -26,7 +25,6 @@ export class ErroApi extends Error {
   }
 }
 
-// O backend responde {"erro": "..."} nas regras de negócio e {campo: "mensagem"} nas validações.
 function mensagem(status, dados) {
   if (dados && typeof dados.erro === 'string') return dados.erro;
   if (dados && typeof dados === 'object') {
@@ -75,7 +73,7 @@ async function pedir(base, caminho, { metodo = 'GET', corpo, autenticado = true 
   return dados;
 }
 
-// ---- Serviço de Contas (8080)
+// Serviço de Contas (8080)
 export const entrar = (email, senha) =>
   pedir(CONTAS, '/api/auth/login', { metodo: 'POST', corpo: { email, senha }, autenticado: false });
 
@@ -102,7 +100,7 @@ export const desbloquearConta = (numero) =>
 
 export const auditoria = () => pedir(CONTAS, '/api/auditoria');
 
-// ---- Serviço de Transacções (8081)
+// Serviço de Transacções (8081)
 export const depositar = (numero, valor) =>
   pedir(TRANSACCOES, `/api/contas/${numero}/depositos`, { metodo: 'POST', corpo: { valor } });
 
