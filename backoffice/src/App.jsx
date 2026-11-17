@@ -3,6 +3,7 @@ import { entrar, guardarToken, temToken, definirAoExpirar } from './api.js';
 import Clientes from './pages/Clientes.jsx';
 import Contas from './pages/Contas.jsx';
 import Auditoria from './pages/Auditoria.jsx';
+import Funcionarios from './pages/Funcionarios.jsx';
 
 export const BANCO = 'Premium Bank';
 
@@ -120,6 +121,11 @@ export default function App() {
             Contas
           </button>
           {eAdmin && (
+            <button className={pagina === 'funcionarios' ? 'activo' : ''} onClick={() => setPagina('funcionarios')}>
+              Funcionários
+            </button>
+          )}
+          {eAdmin && (
             <button className={pagina === 'auditoria' ? 'activo' : ''} onClick={() => setPagina('auditoria')}>
               Auditoria
             </button>
@@ -136,6 +142,7 @@ export default function App() {
         {pagina === 'contas' && (
           <Contas filtroCliente={filtroCliente} limparFiltro={() => setFiltroCliente(null)} />
         )}
+        {pagina === 'funcionarios' && eAdmin && <Funcionarios />}
         {pagina === 'auditoria' && eAdmin && <Auditoria />}
       </main>
     </div>

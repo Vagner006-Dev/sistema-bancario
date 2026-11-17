@@ -29,7 +29,7 @@ button:disabled { opacity: .6; cursor: default; }
 button.primario { background: var(--cor); border-color: var(--cor); color: #fff; }
 button.primario:hover { background: var(--cor-escura); }
 
-input {
+input, select {
   width: 100%;
   font: inherit;
   padding: 8px;

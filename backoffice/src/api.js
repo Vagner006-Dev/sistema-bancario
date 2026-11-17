@@ -106,3 +106,8 @@ export const depositar = (numero, valor) =>
 
 export const movimentos = (numero) =>
   pedir(TRANSACCOES, `/api/contas/${numero}/movimentos?tamanho=50`);
+
+export const listarFuncionarios = () => pedir(CONTAS, '/api/funcionarios');
+
+export const criarFuncionario = (f) =>
+  pedir(CONTAS, '/api/funcionarios', { metodo: 'POST', corpo: f });
